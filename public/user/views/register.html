@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>用户注册</title>
+    <meta name="keywords" content="许愿墙，许愿" />
+    <meta name="description" content="许愿墙注册界面" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <!-- CSS -->
+        <link rel="stylesheet" href="/user/assets/css/reset.css">
+        <link rel="stylesheet" href="/user/assets/css/supersized.css">
+        <link rel="stylesheet" href="/user/assets/css/style.css">
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <div class="page-container">
+            <h1>注册</h1>
+            <div class="isShow"></div>
+            <form action="" method="post">
+                <input type="text" name="username" class="username" placeholder="用户名">
+                <input type="password" name="password" class="password" placeholder="密码">
+                <button type="button" id="registerBtn">注册</button>
+                <div class="error"><span>+</span></div>
+            </form>
+        </div>  
+        <!-- Javascript -->
+        <script src="/user/assets/js/jquery-1.8.2.min.js"></script>
+        <script src="/user/assets/js/supersized.3.2.7.min.js"></script>
+        <script src="/user/assets/js/supersized-init.js"></script>
+        <script src="/user/assets/js/scripts.js"></script>
+    </body>
+
+    <script type="text/javascript">
+        
+        $('#registerBtn').on('click',function(){
+            var username = $('.username').val();
+            var password = $('.password').val();
+            console.log('username>>>>'+username);
+            console.log("password>>>>"+password);
+            $.ajax({
+                url  : 'http://10.1.1.179:3000/user/register',
+                type : 'post',
+                dataType : 'json',
+                data : {username:username,password:password},
+                success : function(res){
+                    if(res.code == 200 && res.message == 'ok'){
+                        $(".isShow").html('注册成功');
+                      //  window.location.href = 'http://www.baidu.com';
+                      alert("注册成功");
+                    }else if(res.code ==400){
+                          $(".isShow").html(res.message);   
+                    }
+                }
+            });       
+        });      
+    </script>
+</html>
+
+

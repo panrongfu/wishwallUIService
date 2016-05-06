@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>管理员登录</title>
+    <meta name="keywords" content="许愿墙后台管理" />
+    <meta name="description" content="许愿墙后台管理" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="/admin/assets/js/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="/admin/assets/images/login.js"></script>
+    <link href="/admin/assets/css/login2.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="login" style="margin-top:50px;">
+        <div class="header">
+            <div class="switch" id="switch">
+                <a class="switch_btn_focus" id="switch_qlogin" href="javascript:void(0);" tabindex="7">快速登录</a>           
+            </div>
+        </div>
+        <div class="web_qr_login" id="web_qr_login" style="display: block; height: 235px;">
+            <!--登录-->
+            <div class="web_login" id="web_login">
+                <div class="login-box">
+                    <div class="login_form">
+                        <form action="" name="loginform" accept-charset="utf-8" id="login_form" class="loginForm" method="post">
+                            <input type="hidden" name="did" value="0"/>
+                            <input type="hidden" name="to" value="log"/>
+                            <div class="uinArea" id="uinArea">
+                                <label class="input-tips" for="u">帐号：</label>
+                                <div class="inputOuter" id="uArea">
+                                    <input type="text" id="adminname" name="adminname" class="inputstyle"/>
+                                </div>
+                            </div>
+                            <div class="pwdArea" id="pwdArea">
+                                <label class="input-tips" for="p">密码：</label>
+                                <div class="inputOuter" id="pArea">
+                                    <input type="password" id="password"  class="inputstyle"/>
+                                </div>
+                            </div>
+                            <div style="padding-left:50px;margin-top:20px;">
+                                <input type="button"  id="loginBtn" value="登 录" style="width:150px;" class="button_blue"/>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </div> <!--登录end--> 
+</div>
+<script type="text/javascript">
+
+    $('#loginBtn').on('click',function(){
+        var adminname = $('#adminname').val();
+        var password = $('#password').val();
+        console.log('admin>>'+adminname);
+        console.log('password>>>'+password);
+         $.ajax({
+             url : 'http://10.1.1.179:3000/admin/login',
+             type : 'post',
+             dataType : 'json',
+             data : {adminname:adminname,password:password},
+             success:function(res){           
+                if(res.code == 200){    
+                    alert(JSON.stringify(res));                              
+                   sessionStorage.setItem("id",res.result.id);
+                   sessionStorage.setItem("wToken","Bearer "+res.result.wToken);
+                   window.location.href='./home.html';
+                }
+             }
+         }); 
+ }); 
+</script>
+</body>
+</html>
