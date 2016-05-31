@@ -22,7 +22,7 @@
     var roomName = $('#roomName').val();
     console.log(id+"<><>"+wToken+"***"+roomName);
     $.ajax({
-        url : 'http://10.1.1.179:3000/admin/createChatroom',
+        url : 'http://120.25.234.90:3000/admin/createChatroom',
         headers : {Authorization:wToken},
         data : {roomName:roomName},
         type : 'post',
