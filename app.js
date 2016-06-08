@@ -7,7 +7,7 @@ app.use(function*() {
   var opts = {root: __dirname + '/public'};
 
   if ('/' == this.path) {
-    yield send(this, "/public/user/views/login.html");
+    yield send(this, "/public/user/views/home.html");
   } else {
     yield send(this, this.path, opts);
   }
